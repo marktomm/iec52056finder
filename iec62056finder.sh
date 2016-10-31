@@ -18,14 +18,14 @@ fi
 printf '/?!\015\012' >> ${dev} # get vendor id, all devices usually answer. Indicates that serial settings OK
 
 attempts=2
-att_ctr=1
+att_ctr=0
 while [ 1 ]
 do     
     printf '/?'"${count}"'!\015\012' >> ${dev}
+    att_ctr=$((att_ctr+1))
     if [[ ${att_ctr} -eq  ${attempts} ]]; then
         count=$((count+1)) 
-        att_ctr=1
+        att_ctr=0
     fi
-    att_ctr=$((att_ctr+1))
     sleep 2 
 done
